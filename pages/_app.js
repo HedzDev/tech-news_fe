@@ -13,7 +13,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage';
 
 const reducers = combineReducers({ bookmarks, user });
-const persistConfig = { key: 'tech-news', storage };
+const persistConfig = { key: 'tech-news-v2', storage };
 
 const store = configureStore({
   reducer: persistReducer(persistConfig, reducers),
