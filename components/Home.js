@@ -12,7 +12,7 @@ function Home() {
   const [topArticle, setTopArticle] = useState({});
 
   useEffect(() => {
-    fetch('http://localhost:3000/articles')
+    fetch('https://tech-news-be.vercel.app/articles')
       .then((res) => res.json())
       .then((data) => {
         setTopArticle(data.articles[0]);

@@ -36,7 +36,7 @@ function Header() {
   const handleRegister = () => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*]).{8,}$/;
     if (regex.test(signupPassword)) {
-      fetch('http://localhost:3000/users/signup', {
+      fetch('https://tech-news-be.vercel.app/users/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -59,7 +59,7 @@ function Header() {
   };
 
   const handleConnect = () => {
-    fetch('http://localhost:3000/users/signin', {
+    fetch('https://tech-news-be.vercel.app/users/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
