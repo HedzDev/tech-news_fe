@@ -58,3 +58,14 @@ button:hover {
   outline: none;
   text-shadow: 1px 1px 0px rgb(134, 131, 131);
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  font-weight: 600;
+  color: rgba(233, 190, 89);
+
+}

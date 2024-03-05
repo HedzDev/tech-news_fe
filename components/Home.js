@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 
 function Home() {
   const bookmarks = useSelector((state) => state.bookmarks.value);
+  const hiddenArticles = useSelector((state) => state.hiddenArticles.value);
 
   const [articlesData, setArticlesData] = useState([]);
   const [topArticle, setTopArticle] = useState({});
@@ -20,11 +21,13 @@ function Home() {
       });
   }, []);
 
-  const articles = articlesData.map((data, i) => {
+  const filteredArticles = articlesData.filter(
+    (data) => !hiddenArticles.includes(data.title)
+  );
+  const articles = filteredArticles.map((data, i) => {
     const isBookmarked = bookmarks.some(
       (bookmark) => bookmark.title === data.title
     );
-
     return <Article key={i} {...data} isBookmarked={isBookmarked} />;
   });
 
@@ -38,7 +41,7 @@ function Home() {
   return (
     <div>
       <Head>
-        <title>Morning News - Home</title>
+        <title>Tech News - Home</title>
       </Head>
 
       {topArticles}

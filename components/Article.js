@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import styles from '../styles/Article.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../reducers/bookmarks';
+import { hideArticle } from '../reducers/hiddenArticles';
 
 function Article(props) {
   const dispatch = useDispatch();
@@ -42,6 +43,13 @@ function Article(props) {
           className={styles.bookmarkIcon}
           style={iconStyle}
         />
+        {props.inBookmarks || (
+          <FontAwesomeIcon
+            icon={faEyeSlash}
+            onClick={() => dispatch(hideArticle(props.title))}
+            className={styles.hideIcon}
+          />
+        )}
       </div>
       <h4 style={{ textAlign: 'right' }}>- {props.author}</h4>
       <div className={styles.divider}></div>

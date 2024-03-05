@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import styles from '../styles/Header.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faXmark, faEye } from '@fortawesome/free-solid-svg-icons';
 import { Modal } from 'antd';
 import Moment from 'react-moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, logout } from '../reducers/user';
 import { removeAllBookmarks } from '../reducers/bookmarks';
+import { unhideArticles } from '../reducers/hiddenArticles';
 
 function Header() {
   const dispatch = useDispatch();
@@ -142,24 +143,43 @@ function Header() {
           Welcome, {user.username[0].toUpperCase() + user.username.slice(1)} 👋🏼/
         </p>
         <button onClick={() => handleLogout()}>Logout</button>
+        <FontAwesomeIcon
+          icon={faEye}
+          onClick={() => dispatch(unhideArticles())}
+          className={styles.unhideIcon}
+        />
       </div>
     );
   } else {
     if (isModalVisible) {
       userSection = (
-        <FontAwesomeIcon
-          icon={faXmark}
-          onClick={() => showModal()}
-          className={styles.userSection}
-        />
+        <div className={styles.headerIcons}>
+          <FontAwesomeIcon
+            onClick={showModal}
+            className={styles.userSection}
+            icon={faXmark}
+          />
+          <FontAwesomeIcon
+            icon={faEye}
+            onClick={() => dispatch(unhideArticles())}
+            className={styles.unhideIcon}
+          />
+        </div>
       );
     } else {
       userSection = (
-        <FontAwesomeIcon
-          icon={faUser}
-          onClick={() => showModal()}
-          className={styles.userSection}
-        />
+        <div className={styles.headerIcons}>
+          <FontAwesomeIcon
+            onClick={showModal}
+            className={styles.userSection}
+            icon={faUser}
+          />
+          <FontAwesomeIcon
+            icon={faEye}
+            onClick={() => dispatch(unhideArticles())}
+            className={styles.unhideIcon}
+          />
+        </div>
       );
     }
   }
